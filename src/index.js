@@ -1,9 +1,47 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./CSS/index.css";
+import "./Styles/index.css";
 import App from "./App";
+import { Provider } from "react-redux";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import configureStore from "./Store/ConfigureStore";
+import { addEvent, editEvent } from "./Actions/Events";
+import { setFilters, resetFilters } from "./Actions/Filters";
+
+const store = configureStore();
+
+store.subscribe(() => console.log(store.getState()));
+
+store.dispatch(addEvent({ description: "ahoj", cost: 100 }));
+store.dispatch(addEvent({ description: "prdel" }));
+const something = store.dispatch(addEvent({ description: "neco" }));
+
+store.dispatch(
+	editEvent(something.event.id, {
+		ahoj: 1,
+		note: "tohle je note",
+		omg: "to je neco"
+	})
+);
+
+store.dispatch(
+	setFilters({
+		fromDate: 100,
+		noOfPlayers: 3,
+		sortBy: "eventDate",
+		sports: ["badminton", "squash"]
+	})
+);
+
+// store.dispatch(resetFilters());
+
+const ConnectedApp = (
+	<Provider store={store}>
+		<App />
+	</Provider>
+);
+
+ReactDOM.render(ConnectedApp, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

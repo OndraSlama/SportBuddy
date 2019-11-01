@@ -1,13 +1,11 @@
 import React from "react";
-import "./CSS/App.css";
-import Header from "./Components/Header.js";
+import "./Styles/App.css";
+import Router from "./Routers/Router";
 
 const App = () => {
 	return (
 		<div className="App">
-			<Header />
-			<p> Ahoj Míšo </p>
-			<p> No ahoj Ondro </p>
+			<Router />
 		</div>
 	);
 };
