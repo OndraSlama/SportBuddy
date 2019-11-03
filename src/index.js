@@ -1,11 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./CSS/index.css";
+import "./Styles/index.css";
 import App from "./App";
+import { Provider } from "react-redux";
+import createStore from "./Store/Store";
+import addEvent from "./Actions/index";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const store = createStore();
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-// serviceWorker.unregister();
+store.dispatch(addEvent({ description: "ahoj" }));
+
+const ConnectedApp = (
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
+
+ReactDOM.render(ConnectedApp, document.getElementById("root"));

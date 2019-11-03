@@ -1,15 +1,14 @@
-import React from "react";
-import "./CSS/App.css";
-import Header from "./Components/Header.js";
+import React, { Component } from "react";
+import "./Styles/App.css";
+import Router from "./Routers/Router";
 
-const App = () => {
-	return (
-		<div className="App">
-			<Header />
-			<p> Ahoj Míšo </p>
-			<p> No ahoj Ondro </p>
-		</div>
-	);
-};
-
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Router />
+      </div>
+    );
+  }
+}
 export default App;
