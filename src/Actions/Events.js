@@ -2,7 +2,7 @@ import uuid from "uuid";
 
 // ADD_EVENT
 export const addEvent = ({
-	description = "",
+	eventName = "",
 	note = "",
 	location = "",
 	noOfPlayers = 2,
@@ -13,7 +13,7 @@ export const addEvent = ({
 	type: "ADD_EVENT",
 	event: {
 		id: uuid(),
-		description,
+		eventName,
 		note,
 		location,
 		noOfPlayers,
@@ -23,7 +23,7 @@ export const addEvent = ({
 	}
 });
 
-export const removeExpense = ({ id } = {}) => ({
+export const removeEvent = id => ({
 	type: "REMOVE_EVENT",
 	id
 });

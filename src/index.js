@@ -12,9 +12,9 @@ const store = configureStore();
 
 store.subscribe(() => console.log(store.getState()));
 
-store.dispatch(addEvent({ description: "ahoj", cost: 100 }));
-store.dispatch(addEvent({ description: "prdel" }));
-const something = store.dispatch(addEvent({ description: "neco" }));
+store.dispatch(addEvent({ eventName: "ahoj", cost: 100 }));
+store.dispatch(addEvent({ eventName: "prdel" }));
+const something = store.dispatch(addEvent({ eventName: "neco" }));
 
 store.dispatch(
 	editEvent(something.event.id, {
