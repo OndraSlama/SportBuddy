@@ -32,62 +32,52 @@ class CreateEvent extends Component {
 	state = {
 		eventName: "",
 		note: "",
+		sport: "None",
 		eventStartTime: "16:00",
 		eventEndTime: "18:00",
 		eventDate: moment().startOf("day"),
-		noOfPlayers: 0,
+		cost: [],
+		noOfPlayers: [],
 		showAcknowledge: false,
 		calendarFocused: false,
 		exactTimeChecked: false
 	};
 
-	editInputHandler(event) {
+	// Handlers
+	inputChangeHandler = event => {
 		event.persist();
 		this.setState(prevState => {
 			prevState[event.target.id] = event.target.value;
 			return { ...prevState };
 		});
-	}
-
-	dateChangeHandler = eventDate =>
-		this.setState(() => {
-			return { eventDate: eventDate.startOf("day") };
-		});
-
+	};
+	selectChangeHandler = event => {
+		event.persist();
+		this.setState(() => ({ sport: event.target.value }));
+	};
+	dateChangeHandler = eventDate => this.setState(() => ({ eventDate: eventDate.startOf("day") }));
 	timeChangeHandler = ([eventStartTime, eventEndTime]) =>
-		this.setState(() => {
-			return {
-				eventStartTime,
-				eventEndTime
-			};
+		this.setState(() => ({ eventStartTime, eventEndTime }));
+	focusChangeHandler = ({ focused }) => this.setState(() => ({ calendarFocused: focused }));
+	swithChangeHandler = exactTimeChecked => {
+		this.setState(prevState => {
+			if (exactTimeChecked) {
+				prevState.eventEndTime = prevState.eventStartTime;
+			}
+			prevState.exactTimeChecked = exactTimeChecked;
+			return { ...prevState };
 		});
-
-	focusChangeHandler = ({ focused }) =>
-		this.setState(() => {
-			return { calendarFocused: focused };
-		});
-
-	swithChangeHandler = exactTimeChecked =>
-		this.setState(() => {
-			return { exactTimeChecked };
-		});
+	};
 
 	submitHandler(event) {
 		event.preventDefault();
-		// console.log(this.state.eventStartTime);
 		console.log(this.state.eventDate.format());
 
 		const eventStartDate = moment(this.state.eventDate)
-			.add(
-				moment.duration(this.state.eventStartTime).asMinutes(),
-				"minutes"
-			)
+			.add(moment.duration(this.state.eventStartTime).asMinutes(), "minutes")
 			.valueOf();
 		const eventEndDate = moment(this.state.eventDate)
-			.add(
-				moment.duration(this.state.eventEndTime).asMinutes(),
-				"minutes"
-			)
+			.add(moment.duration(this.state.eventEndTime).asMinutes(), "minutes")
 			.valueOf();
 
 		this.props.dispatch(
@@ -104,6 +94,7 @@ class CreateEvent extends Component {
 		}, 2000);
 	}
 
+	// Render functions
 	renderTimeText() {
 		if (this.state.exactTimeChecked) {
 			return (
@@ -122,6 +113,7 @@ class CreateEvent extends Component {
 		}
 	}
 
+	// Render
 	render() {
 		return (
 			<div>
@@ -133,7 +125,7 @@ class CreateEvent extends Component {
 						id="eventName"
 						placeholder="Event name"
 						value={this.state.text}
-						onChange={e => this.editInputHandler(e)}
+						onChange={e => this.inputChangeHandler(e)}
 					/>
 					<br />
 					<input
@@ -141,7 +133,7 @@ class CreateEvent extends Component {
 						id="cost"
 						placeholder="Cost"
 						value={this.state.cost}
-						onChange={e => this.editInputHandler(e)}
+						onChange={e => this.inputChangeHandler(e)}
 					/>
 					<br />
 					<input
@@ -149,8 +141,19 @@ class CreateEvent extends Component {
 						id="noOfPlayers"
 						placeholder="Number of players"
 						value={this.state.noOfPlayers}
-						onChange={e => this.editInputHandler(e)}
+						onChange={e => this.inputChangeHandler(e)}
 					/>
+					<br />
+					<select
+						name="Select Sport"
+						id="sportSelect"
+						value={this.state.sport}
+						onChange={this.selectChangeHandler}>
+						{this.props.sports.map(sport => (
+							<option value={sport}>{sport}</option>
+						))}
+						<option value="None">None</option>
+					</select>
 					<br />
 					Exact time
 					<Switch
@@ -182,20 +185,15 @@ class CreateEvent extends Component {
 						type="text"
 						id="note"
 						placeholder="Note"
-						onChange={e => this.editInputHandler(e)}
+						onChange={e => this.inputChangeHandler(e)}
 					/>
 					<br />
-					<button
-						type="submit"
-						className="createEvent"
-						id="submitEvent"
-					>
+					<button type="submit" className="createEvent" id="submitEvent">
 						Create event
 					</button>
 					{this.state.showAcknowledge && (
 						<p>
-							Event saved.{" "}
-							<NavLink to="/Events">See Events</NavLink>
+							Event saved. <NavLink to="/Events">See Events</NavLink>
 						</p>
 					)}
 				</form>

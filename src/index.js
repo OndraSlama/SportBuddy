@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import configureStore from "./Store/ConfigureStore";
 import { addEvent, editEvent } from "./Actions/Events";
 import { setFilters, resetFilters } from "./Actions/Filters";
+import { addSports } from "./Actions/Sports";
 
 const store = configureStore();
 
@@ -24,15 +25,17 @@ store.dispatch(
 	})
 );
 
-store.dispatch(
-	setFilters({
-		fromDate: 100,
-		noOfPlayers: 3,
-		sortBy: "eventDate",
-		sports: ["badminton", "squash"]
-	})
-);
+// store.dispatch(
+// 	setFilters({
+// 		fromDate: 100,
+// 		noOfPlayers: 2,
+// 		sortBy: "noOfPlayers"
+// 		sports: ["badminton", "squash"]
+// 	})
+// );
 
+store.dispatch(addSports(["Tennis", "Ping Pong"]));
+store.dispatch(addSports(["Tennis", "Ping Pong"]));
 // store.dispatch(resetFilters());
 
 const ConnectedApp = (

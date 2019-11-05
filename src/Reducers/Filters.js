@@ -1,4 +1,5 @@
 const filtersDefault = {
+	text: "",
 	sports: [],
 	noOfPlayers: undefined,
 	fromDate: undefined,

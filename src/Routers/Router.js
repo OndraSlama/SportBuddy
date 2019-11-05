@@ -13,11 +13,7 @@ const Router = () => {
 			<Header />
 			<Switch>
 				<Route exact={true} path="/" component={Home} />
-				<Route
-					exact={true}
-					path="/CreateEvent"
-					component={CreateEvent}
-				/>
+				<Route exact={true} path="/CreateEvent" component={CreateEvent} />
 				<Route exact={true} path="/Events" component={Events} />
 				<Route exact={true} path="/Profile" component={Profile} />
 				<Route exact={true} component={NotFound} />

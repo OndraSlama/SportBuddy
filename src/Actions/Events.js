@@ -4,6 +4,7 @@ import uuid from "uuid";
 export const addEvent = ({
 	eventName = "",
 	note = "",
+	sport = "",
 	location = "",
 	noOfPlayers = 2,
 	cost = 0,
@@ -16,6 +17,7 @@ export const addEvent = ({
 		id: uuid(),
 		eventName,
 		note,
+		sport,
 		location,
 		noOfPlayers,
 		cost,

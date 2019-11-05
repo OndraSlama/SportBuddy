@@ -29,35 +29,32 @@ const TimeSlider = ({
 		}
 	};
 
+	let mySlider = "";
 	if (exactTimeChecked) {
-		return (
+		mySlider = (
 			<TooltipSlider
 				{...commonProps}
 				defaultValue={getMinutes(eventStartTime)}
 				included={false}
-				onChange={time =>
-					onChange([getHoursText(time), getHoursText(time)])
-				}
+				onChange={time => onChange([getHoursText(time), getHoursText(time)])}
 				tipFormatter={value => getHoursText(value)}
 				disabled={disable}
 			/>
 		);
 	} else {
-		return (
+		mySlider = (
 			<TooltipRange
 				{...commonProps}
-				defaultValue={[
-					getMinutes(eventStartTime),
-					getMinutes(eventEndTime)
-				]}
-				onChange={time =>
-					onChange([getHoursText(time[0]), getHoursText(time[1])])
-				}
+				defaultValue={[getMinutes(eventStartTime), getMinutes(eventEndTime)]}
+				onChange={time => onChange([getHoursText(time[0]), getHoursText(time[1])])}
 				tipFormatter={value => getHoursText(value)}
 				disabled={disable}
+				pushable={step}
 			/>
 		);
 	}
+
+	return <div>{mySlider}</div>;
 };
 
 export default TimeSlider;
@@ -71,9 +68,4 @@ function getHoursText(minutes) {
 	dateObj.setHours(0);
 	dateObj.setMinutes(minutes);
 	return moment(dateObj).format("HH:mm");
-	// Old version
-	// const hours = Math.floor(minutes / 60);
-	// const min = minutes % 60 === 0 ? (minutes % 60) + "0" : minutes % 60;
-	// console.log(moment(dateObj).format("HH:mm"));
-	// return hours + ":" + min;
 }
