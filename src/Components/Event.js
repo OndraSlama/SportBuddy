@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { removeEvent } from "../Actions/Events";
 import "../Styles/Event.css";
+import TimeSlider from "./TimeSlider";
+import moment from "moment";
 
 const Event = props => {
 	return (
@@ -13,7 +15,16 @@ const Event = props => {
 			<br />
 			<span>Players: {props.noOfPlayers}</span>
 			<br />
-			<span>Date: {props.eventDate}</span>
+			<span>
+				Date: {moment(props.eventStartDate).format("DD-MMM-YYYY")}
+			</span>
+			<br />
+			<TimeSlider
+				eventStartTime="18:30"
+				eventEndTime="19:30"
+				disable={true}
+				step={15}
+			/>
 			<br />
 
 			<button

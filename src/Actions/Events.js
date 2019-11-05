@@ -7,8 +7,9 @@ export const addEvent = ({
 	location = "",
 	noOfPlayers = 2,
 	cost = 0,
-	eventDate = 0,
-	createdAt = 0
+	eventStartDate = new Date().getTime(),
+	eventEndDate = new Date().getTime(),
+	createdAt = new Date().getTime()
 } = {}) => ({
 	type: "ADD_EVENT",
 	event: {
@@ -18,7 +19,8 @@ export const addEvent = ({
 		location,
 		noOfPlayers,
 		cost,
-		eventDate,
+		eventStartDate,
+		eventEndDate,
 		createdAt
 	}
 });
