@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addEvent } from "../Actions/index";
+import "../Styles/Contain.css";
 
 class CreateEvent extends Component {
   state = { eventName: "", sport: "" };
   render() {
     return (
-      <div>
+      <div className="Contain">
         <h1>CreateEvent</h1>
         <form
           onSubmit={e => {

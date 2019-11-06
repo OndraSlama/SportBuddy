@@ -1,0 +1,20 @@
+.Header {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  grid-column: 1/-1;
+  grid-row: 1/1;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: slategray;
+}
+
+.Header a {
+  text-decoration: none;
+}
+
+.Header h1 {
+  margin: 0;
+  padding: 0;
+  color: black;
+}

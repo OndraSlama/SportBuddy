@@ -1,0 +1,20 @@
+.Footer {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  grid-column: 1/-1;
+  grid-row: 3/4;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: skyblue;
+}
+
+.Footer a {
+  text-decoration: none;
+}
+
+.Footer h1 {
+  margin: 0;
+  padding: 0;
+  color: black;
+}

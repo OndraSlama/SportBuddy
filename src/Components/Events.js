@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
+import "../Styles/Contain.css";
 
 const Events = props => {
   return (
-    <div>
+    <div className="Contain">
       <h1>Events</h1>
       <ul>
         {props.events.map(event => (
