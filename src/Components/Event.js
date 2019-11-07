@@ -8,7 +8,7 @@ import moment from "moment";
 const Event = props => {
 	return (
 		<div className="event">
-			<h3>{props.eventName}</h3>
+			<h3>{props.name}</h3>
 			{props.note && (
 				<div>
 					<span>Note: {props.note} </span>
@@ -37,16 +37,16 @@ const Event = props => {
 				</div>
 			)}
 
-			{(props.eventStartDate || props.eventStartDate === 0) && (
+			{props.date && (
 				<div>
-					<span>Date: {moment(props.eventStartDate).format("DD-MMM-YYYY")} </span>
+					<span>Date: {props.date.format("DD-MMM-YYYY")} </span>
 					<br />
 				</div>
 			)}
 
 			<TimeSlider
-				eventStartTime={moment(props.eventStartDate).format("HH:mm")}
-				eventEndTime={moment(props.eventEndDate).format("HH:mm")}
+				startTime={moment(props.eventStartDate).format("HH:mm")}
+				endTime={moment(props.eventEndDate).format("HH:mm")}
 				disable={true}
 				step={15}
 			/>

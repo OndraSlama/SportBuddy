@@ -5,9 +5,6 @@ import selectEvents from "../Selectors/Events";
 import EventsFilters from "./EventsFilters";
 
 const Events = props => {
-	console.log(props.events);
-	console.log(props.filters);
-
 	const filteredEvents = selectEvents(props.events, props.filters);
 	return (
 		<div>

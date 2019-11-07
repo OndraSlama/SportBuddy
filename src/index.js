@@ -11,11 +11,11 @@ import { addSports } from "./Actions/Sports";
 
 const store = configureStore();
 
-store.subscribe(() => console.log(store.getState()));
+// store.subscribe(() => console.log(store.getState()));
 
-store.dispatch(addEvent({ eventName: "ahoj", cost: 100 }));
-store.dispatch(addEvent({ eventName: "prdel" }));
-const something = store.dispatch(addEvent({ eventName: "neco" }));
+store.dispatch(addEvent({ name: "ahoj", cost: 100 }));
+store.dispatch(addEvent({ name: "prdel" }));
+const something = store.dispatch(addEvent({ name: "neco" }));
 
 store.dispatch(
 	editEvent(something.event.id, {
@@ -27,7 +27,7 @@ store.dispatch(
 
 // store.dispatch(
 // 	setFilters({
-// 		fromDate: 100,
+// 		startDate: 100,
 // 		noOfPlayers: 2,
 // 		sortBy: "noOfPlayers"
 // 		sports: ["badminton", "squash"]

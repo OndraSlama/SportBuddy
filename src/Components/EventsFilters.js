@@ -9,16 +9,7 @@ class EventsFilters extends React.Component {
 		calendarFocused: null
 	};
 	onDatesChange = ({ startDate, endDate }) => {
-		if (startDate) {
-			this.props.dispatch(setFilters({ fromDate: startDate.startOf("day").valueOf() }));
-		} else {
-			// this.props.dispatch(setFilters({ fromDate: startDate }));
-		}
-		if (endDate) {
-			this.props.dispatch(setFilters({ toDate: endDate.startOf("day").valueOf() }));
-		} else {
-			// this.props.dispatch(setFilters({ toDate: endDate }));
-		}
+		this.props.dispatch(setFilters({ startDate, endDate }));
 	};
 	onFocusChange = calendarFocused => {
 		this.setState(() => ({ calendarFocused }));
@@ -43,8 +34,8 @@ class EventsFilters extends React.Component {
 					<option value="noOfPlayers">Number of players</option>
 				</select>
 				<DateRangePicker
-					startDate={moment(this.props.filters.fromDate)}
-					endDate={moment(this.props.filters.toDate)}
+					startDate={this.props.filters.startDate}
+					endDate={this.props.filters.endDate}
 					onDatesChange={this.onDatesChange}
 					focusedInput={this.state.calendarFocused}
 					onFocusChange={this.onFocusChange}

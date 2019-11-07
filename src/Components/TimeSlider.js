@@ -13,8 +13,8 @@ const TimeSlider = ({
 	onChange = () => {},
 	disable = false,
 	step = 1,
-	eventStartTime,
-	eventEndTime
+	startTime,
+	endTime
 }) => {
 	const commonProps = {
 		min: 0,
@@ -34,7 +34,7 @@ const TimeSlider = ({
 		mySlider = (
 			<TooltipSlider
 				{...commonProps}
-				defaultValue={getMinutes(eventStartTime)}
+				defaultValue={getMinutes(startTime)}
 				included={false}
 				onChange={time => onChange([getHoursText(time), getHoursText(time)])}
 				tipFormatter={value => getHoursText(value)}
@@ -45,7 +45,7 @@ const TimeSlider = ({
 		mySlider = (
 			<TooltipRange
 				{...commonProps}
-				defaultValue={[getMinutes(eventStartTime), getMinutes(eventEndTime)]}
+				defaultValue={[getMinutes(startTime), getMinutes(endTime)]}
 				onChange={time => onChange([getHoursText(time[0]), getHoursText(time[1])])}
 				tipFormatter={value => getHoursText(value)}
 				disabled={disable}

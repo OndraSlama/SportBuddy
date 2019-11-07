@@ -1,18 +1,20 @@
-export default (events, { text, sports, noOfPlayers, fromDate, toDate, sortBy }) => {
+export default (events, { text, sports, noOfPlayers, startDate, endDate, sortBy }) => {
 	return events
 		.filter(event => {
-			const fromDateMatch = typeof fromDate !== "number" || event.createdAt >= fromDate;
-			const toDateMatch = typeof toDate !== "number" || event.createdAt <= toDate;
+			const startDateMatch = startDate
+				? startDate.startOf("day").isSameOrBefore(event.date)
+				: true;
+			const endDateMatch = endDate ? endDate.endOf("day").isSameOrAfter(event.date) : true;
 			const noOfPlayersMatch =
 				typeof noOfPlayers !== "number" || event.noOfPlayers === noOfPlayers;
-			const sportMatch = sports.length === 0 || sports.includes(event.sport);
-			const eventTextMatch = event.eventName.toLowerCase().includes(text.toLowerCase());
+			const sportMatch = sports || sports.includes(event.sport);
+			const eventTextMatch = event.name.toLowerCase().includes(text.toLowerCase());
 			const sportTextMatch = false;
 			const noteTextMatch = false;
 
 			return (
-				fromDateMatch &&
-				toDateMatch &&
+				startDateMatch &&
+				endDateMatch &&
 				noOfPlayersMatch &&
 				sportMatch &&
 				(eventTextMatch || sportTextMatch || noteTextMatch)

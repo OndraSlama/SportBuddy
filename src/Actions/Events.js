@@ -1,28 +1,31 @@
 import uuid from "uuid";
+import moment from "moment";
 
 // ADD_EVENT
 export const addEvent = ({
-	eventName = "",
+	name = "",
 	note = "",
 	sport = "",
 	location = "",
 	noOfPlayers = 2,
 	cost = 0,
-	eventStartDate = new Date().getTime(),
-	eventEndDate = new Date().getTime(),
-	createdAt = new Date().getTime()
+	date = moment().startOf("day"),
+	startTime = "16:00",
+	endTime = "18:00",
+	createdAt = moment()
 } = {}) => ({
 	type: "ADD_EVENT",
 	event: {
 		id: uuid(),
-		eventName,
+		name,
 		note,
 		sport,
 		location,
 		noOfPlayers,
 		cost,
-		eventStartDate,
-		eventEndDate,
+		date,
+		startTime,
+		endTime,
 		createdAt
 	}
 });

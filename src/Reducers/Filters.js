@@ -1,9 +1,12 @@
+import moment from "moment";
 const filtersDefault = {
 	text: "",
 	sports: [],
 	noOfPlayers: undefined,
-	fromDate: undefined,
-	toDate: undefined,
+	startDate: moment().startOf("day"),
+	endDate: moment().endOf("month"),
+	startTime: "00:00",
+	endTime: "23:59",
 	sortBy: ""
 };
 
