@@ -1,10 +1,12 @@
 import { createStore, combineReducers } from "redux";
 import eventsReducer from "../Reducers/Events";
+import sportsReducer from "../Reducers/Sports";
 
 export default () => {
   const store = createStore(
     combineReducers({
-      events: eventsReducer
+      events: eventsReducer,
+      sports: sportsReducer
     }),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );

@@ -1,11 +1,20 @@
 import uuid from "uuid";
 
-export const addEvent = ({ description = "", sport = "" } = {}) => ({
+export const addEvent = ({
+  description = "",
+  sport = "",
+  lokofu = "",
+  from = undefined,
+  to = undefined
+} = {}) => ({
   type: "ADD_EVENT",
   event: {
     id: uuid(),
     description,
-    sport
+    sport,
+    lokofu,
+    from,
+    to
   }
 });
 
