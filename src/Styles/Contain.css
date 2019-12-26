@@ -8,6 +8,7 @@
   justify-content: space-around;
   background-color: skyblue;
   align-content: center;
+  flex-direction: column;
 }
 
 .Contain a {

@@ -10,6 +10,7 @@ const Event = props => {
         <div>
           <span>{event.description}</span>
           <span>{event.sport}</span>
+          <span>{event.numberOfPlayers}</span>
           <span>{moment(event.from).format("DD MMM YYYY") + ", "}</span>
           <span>{moment(event.to).format("DD MMM YYYY") + ", "}</span>
         </div>

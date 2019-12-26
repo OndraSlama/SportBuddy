@@ -7,16 +7,21 @@ import createStore from "./Store/Store";
 import addEvent from "./Actions/index";
 import { addSports } from "./Actions/Sports";
 import moment from "moment";
+import { createCell } from "./Actions/DatePick";
 
 const store = createStore();
 
 store.dispatch(
   addEvent({
     description: "ahoj",
-    to: moment(new Date()).add(1, "days"),
-    from: moment(new Date())
+    to: "",
+    from: ""
   })
 );
+
+// store.dispatch(createCell({ start: 1, stop: 2 }));
+// store.dispatch(createCell({ start: 3, stop: 4 }));
+
 store.dispatch(addSports(["Tennis", "Ping Pong"]));
 
 const ConnectedApp = (

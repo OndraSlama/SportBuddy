@@ -5,7 +5,7 @@ import Table from "./ReactiveTable";
 const Home = () => {
   return (
     <div className="Contain">
-      <Table />
+      <h1>Home</h1>
     </div>
   );
 };
