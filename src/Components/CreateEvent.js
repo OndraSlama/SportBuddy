@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addEvent } from "../Actions/index";
 import { createCell } from "../Actions/DatePick";
+import { createDaySchedule } from "../Actions/DaySchedule";
 import "../Styles/Contain.css";
 // import DatePicker from "./DatePicker";
 import Helmet from "react-helmet";
@@ -10,7 +11,6 @@ import "react-day-picker/lib/style.css";
 import moment from "moment";
 import Table from "./ReactiveTable";
 import uuid from "uuid";
-import { withAlert } from "react-alert";
 
 class CreateEvent extends Component {
   state = {
@@ -56,22 +56,45 @@ class CreateEvent extends Component {
     }
   }
 
+  // setCells(from, to) {
+  //   var cell = [];
+  //   let dateArray = this.getDates(from, to);
+  //   console.log(dateArray);
+  //   var i;
+  //   for (i = 0; i < dateArray.length; i++) {
+  //     cell.push({
+  //       id: uuid(),
+  //       selected: false,
+  //       toggled: false,
+  //       value: i,
+  //       date: moment(dateArray[i]).format("DD MMM YYYY")
+  //     });
+  //   }
+  //   console.log(cell);
+  //   this.props.dispatch(createCell(cell));
+  // }
+
   setCells(from, to) {
-    var cell = [];
+    var cell = { day: "", cell: [] };
     let dateArray = this.getDates(from, to);
-    console.log(dateArray);
+    // console.log(dateArray);
     var i;
     for (i = 0; i < dateArray.length; i++) {
-      cell.push({
-        id: uuid(),
-        selected: false,
-        toggled: false,
-        value: i,
-        date: moment(dateArray[i]).format("DD MMM YYYY")
-      });
+      cell.day = dateArray[i];
+      var n;
+      for (n = 0; n < 6; n++) {
+        cell.cell.push({
+          id: uuid(),
+          selected: false,
+          toggled: false,
+          value: n,
+          date: moment(dateArray[i]).format("DD MMM YYYY")
+        });
+      }
     }
-    console.log(cell);
-    this.props.dispatch(createCell(cell));
+    // console.log(cell);
+    this.props.dispatch(createDaySchedule(cell));
+    console.log("spustil jsem pri kazdem obnoveni");
   }
 
   handleDayClick(day) {
@@ -93,10 +116,9 @@ class CreateEvent extends Component {
   render() {
     const { from, to } = this.state;
     const modifiers = { start: from, end: to };
-    const alert = this.props.alert;
     return (
       <div className="Contain">
-        <div className="contentBlock" onChange={this.setCells}>
+        <div className="contentBlock">
           {/* <div className="contentBlock"> */}
           <h1>CreateEvent</h1>
           <form
@@ -109,12 +131,13 @@ class CreateEvent extends Component {
                   sport: this.state.sport,
                   from: this.state.from,
                   to: this.state.to,
-                  numberOfPlayers: this.state.numberOfPlayers
+                  numberOfPlayers: this.state.numberOfPlayers,
+                  schedule: this.props.cell.cell
                 })
               );
             }}
             // onChange={console.log(this.state)}
-            onChange={console.log("dispatch: ", this.props.cell)}
+            // onChange={console.log("dispatch: ", this.props.cell)}
           >
             <label>Event name:</label>
             <input
@@ -127,7 +150,7 @@ class CreateEvent extends Component {
                 this.setState(prevState => {
                   return { eventName: e.target.value };
                 });
-                console.log(this.state);
+                // console.log(this.state);
               }}
             />
             <label>Number of players:</label>
@@ -159,7 +182,7 @@ class CreateEvent extends Component {
             </select>
             {/* <DatePicker /> */}
 
-            <div className="RangeExample">
+            <div className="RangeExample" onChange={this.setCells}>
               <button
                 type="button"
                 className="link"
@@ -167,6 +190,7 @@ class CreateEvent extends Component {
               >
                 Reset
               </button>
+
               <DayPicker
                 className="Selectable"
                 numberOfMonths={this.state.numberOfMonths}

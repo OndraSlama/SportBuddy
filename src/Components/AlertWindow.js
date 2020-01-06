@@ -1,18 +1,14 @@
 import React from "react";
-import { useAlert } from "react-alert";
+import { withAlert } from "react-alert";
 
-const AlertWindow = () => {
-  const alert = useAlert();
+const AlertWindow = ({ alert }) => (
+  <button
+    onClick={() => {
+      alert.show("Oh look, an alert!");
+    }}
+  >
+    Show Alert
+  </button>
+);
 
-  return (
-    <button
-      onClick={() => {
-        alert.show("Oh look, an alert!");
-      }}
-    >
-      Show Alert
-    </button>
-  );
-};
-
-export default AlertWindow;
+export default withAlert()(AlertWindow);

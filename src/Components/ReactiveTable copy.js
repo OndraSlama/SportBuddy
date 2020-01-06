@@ -1,8 +1,8 @@
 import React from "react";
 import "../Styles/ReactiveTable.css";
-// import uuid from "uuid";
+import uuid from "uuid";
 import { connect } from "react-redux";
-// import moment from "moment";
+import moment from "moment";
 
 class Table extends React.Component {
   state = {
@@ -29,15 +29,23 @@ class Table extends React.Component {
   }
 
   handleMouseDown(id) {
+    // this.getDates(this.props.cell.startDate,this.props.cell.stopDate);
+
+    // console.log(this.props.cell.startDate)
     this.setState({ toggle: true });
     this.getCurrentMark(id);
-    const cell = this.props.cell.cell;
-    cell.map(cell => {
-      if (cell.id === id) {
-        cell.selected = !cell.selected;
-        cell.toggled = true;
-      }
-      return cell;
+    this.setState({
+      cells: this.props.cell.cell.map(cell => {
+        if (cell.id === id) {
+          return {
+            id,
+            selected: !cell.selected,
+            toggled: true,
+            value: cell.value
+          };
+        }
+        return cell;
+      })
     });
   }
 
@@ -47,30 +55,36 @@ class Table extends React.Component {
 
   handleMouseEnter(id) {
     if (this.state.toggle) {
-      const cell = this.props.cell.cell;
-      cell.map(cell => {
-        if (cell.id === id) {
-          if (cell.selected === this.state.currentMark) {
-            cell.selected = !cell.selected;
-          }
-        }
-        return cell;
-      });
       this.setState({
-        cells: "changed"
+        cells: this.props.cell.cell.map(cell => {
+          if (cell.id === id) {
+            if (cell.selected === this.state.currentMark) {
+              return {
+                id,
+                selected: !cell.selected,
+                toggled: cell.toggled,
+                value: cell.value
+              };
+            }
+          }
+          return cell;
+        })
       });
     }
   }
 
   handleMouseLeave(id) {
     this.setState({ toggle: false });
-    const cell = this.props.cell.cell;
-
-    cell.map(cell => {
-      if (cell.id === id) {
-        cell.selected = false;
-      }
-      return cell;
+    this.setState({
+      cells: this.props.cell.cell.map(cell => {
+        if (cell.id === id) {
+          return {
+            id,
+            selected: false
+          };
+        }
+        return cell;
+      })
     });
   }
 
@@ -89,6 +103,10 @@ class Table extends React.Component {
             <h1>{cell.value}</h1>
           </div>
         ))}
+        {/* {console.log(this.createCell())} */}
+        {/* {console.log(this.state)}
+        {/* {console.log(this.state.currentMark)} */}
+        {/* {console.log("cells po rendru", this.props.cell)} */}
       </div>
     );
   }

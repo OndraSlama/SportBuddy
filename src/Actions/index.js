@@ -5,7 +5,8 @@ export const addEvent = ({
   sport = "",
   from = undefined,
   to = undefined,
-  numberOfPlayers = ""
+  numberOfPlayers = "",
+  schedule = undefined
 } = {}) => ({
   type: "ADD_EVENT",
   event: {
@@ -14,7 +15,8 @@ export const addEvent = ({
     sport,
     from,
     to,
-    numberOfPlayers
+    numberOfPlayers,
+    schedule
   }
 });
 
