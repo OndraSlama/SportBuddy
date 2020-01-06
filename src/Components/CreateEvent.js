@@ -136,8 +136,6 @@ class CreateEvent extends Component {
                 })
               );
             }}
-            // onChange={console.log(this.state)}
-            // onChange={console.log("dispatch: ", this.props.cell)}
           >
             <label>Event name:</label>
             <input
