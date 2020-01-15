@@ -11,13 +11,15 @@ import { createCell } from "./Actions/DatePick";
 
 const store = createStore();
 
-store.dispatch(
-  addEvent({
-    description: "ahoj",
-    to: "",
-    from: ""
-  })
-);
+// store.dispatch(
+//   addEvent({
+//     description: "Badminton pro prasata",
+//     sport: "Badminton",
+//     numberOfPlayers: "4 prasata",
+//     to: "",
+//     from: ""
+//   })
+// );
 
 // store.dispatch(createCell({ start: 1, stop: 2 }));
 // store.dispatch(createCell({ start: 3, stop: 4 }));

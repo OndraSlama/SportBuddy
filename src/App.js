@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Styles/App.css";
 import "./Styles/index.css";
 import Router from "./Routers/Router";
+import "./firebase/firebase";
 
 class App extends Component {
   render() {

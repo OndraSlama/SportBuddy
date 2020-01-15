@@ -1,0 +1,33 @@
+.Event {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.eventItem {
+  display: flex;
+  margin: 10px;
+  border: 1px solid #000;
+  background-color: rgb(133, 177, 129);
+  flex-direction: row;
+}
+
+.eventSchedule {
+  display: grid;
+  grid-template-columns: repeat(6, 25px);
+  grid-template-rows: repeat(4, 25px);
+  grid-gap: 2px;
+  margin: 0;
+  padding: 20px;
+  justify-content: center;
+  text-align: center;
+}
+.eventInfo {
+  color: lightsteelblue;
+}
+
+.kliknute {
+  background-color: red;
+  justify-content: center;
+}
